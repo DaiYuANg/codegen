@@ -1,0 +1,60 @@
+# 配置文件示例
+[codegen]
+name = "MyCodeGenerator"
+version = "1.0.0"
+description = "A tool to generate boilerplate code based on schema and templates."
+outputDirectory = "./generated-sources"
+overwriteExisting = false
+
+[inputSources]
+[[inputSources.database]]
+type = "database"
+name = "PostgreSQLSchema"
+url = "jdbc:postgresql://localhost:5432/mydb"
+username = "dbuser"
+password = "secretpassword"
+tables = ["users", "orders"]
+
+[[inputSources.file]]
+type = "file"
+name = "JSONSchema"
+path = "./schemas/user_schema.json"
+
+[templates]
+[templates.entity]
+name = "entity"
+description = "Generate entity classes from database schema"
+templateFile = "./templates/entity.ftl"
+outputPath = "./generated-sources/entities"
+#[templates.entity.customVariables]
+#package = "com.example.entities"
+#author = "Your Name"
+
+[templates.repository]
+name = "repository"
+description = "Generate repository interfaces"
+templateFile = "./templates/repository.ftl"
+outputPath = "./generated-sources/repositories"
+#[templates.repository.customVariables]
+#package = "com.example.repositories"
+#author = "Your Name"
+
+[advanced]
+[namingConventions]
+classPrefix = "My"
+fieldPrefix = "my_"
+methodPrefix = "get"
+
+[logging]
+level = "debug"
+output = "stdout"
+
+[[params]]
+key = "max_table_size"
+value = "1000"
+description = "Maximum rows for table to generate code for."
+
+[[params]]
+key = "generate_models"
+value = "true"
+description = "Whether to generate model classes (true/false)."
