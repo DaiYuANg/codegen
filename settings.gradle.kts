@@ -25,3 +25,4 @@ buildCache {
 rootProject.name = "codegen"
 include("cli")
 include("document")
+include("core")

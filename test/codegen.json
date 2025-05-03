@@ -1,0 +1,54 @@
+{
+  "codegen": {
+    "name": "MyCodeGenerator",
+    "version": "1.0.0",
+    "description": "A tool to generate boilerplate code based on schema and templates.",
+    "outputDirectory": "./generated-sources",
+    "overwriteExisting": false
+  },
+  "inputSource": {
+    "type": "database",
+    "name": "PostgreSQLSchema",
+    "url": "jdbc:postgresql://localhost:5432/codegen",
+    "username": "root",
+    "password": "root",
+    "tables": ["users", "orders"]
+  },
+  "templates": {
+    "entity": {
+      "name": "entity",
+      "description": "Generate entity classes from database schema",
+      "templateFile": "./templates/entity.ftl",
+      "outputPath": "./generated-sources/entities"
+    },
+    "repository": {
+      "name": "repository",
+      "description": "Generate repository interfaces",
+      "templateFile": "./templates/repository.ftl",
+      "outputPath": "./generated-sources/repositories"
+    }
+  },
+  "advanced": {
+    "namingConventions": {
+      "classPrefix": "My",
+      "fieldPrefix": "my_",
+      "methodPrefix": "get"
+    }
+  },
+  "logging": {
+    "level": "debug",
+    "output": "stdout"
+  },
+  "params": [
+    {
+      "key": "max_table_size",
+      "value": "1000",
+      "description": "Maximum rows for table to generate code for."
+    },
+    {
+      "key": "generate_models",
+      "value": "true",
+      "description": "Whether to generate model classes (true/false)."
+    }
+  ]
+}

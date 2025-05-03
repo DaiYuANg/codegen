@@ -1,5 +1,5 @@
 <#--
-    entity_with_lombok.ftl - FreeMarker template to generate a Spring Boot JPA Entity class with Lombok annotations.
+    entity.ftl - FreeMarker template to generate a Spring Boot JPA Entity class with Lombok annotations.
     This template expects the following parameters:
     - tableName: the name of the database table
     - className: the name of the entity class

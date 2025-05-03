@@ -19,6 +19,7 @@ group = "org.codegen"
 version = "1.0-SNAPSHOT"
 
 dependencies {
+  implementation(projects.core)
   implementation(libs.picocli)
   annotationProcessor(libs.picocli.codegen)
   implementation(libs.guice)
@@ -37,12 +38,6 @@ dependencies {
   implementation(libs.gestalt.toml)
   implementation(libs.gestalt.yaml)
   implementation(libs.dotenv)
-  implementation(libs.freemarker)
-  implementation(libs.schemacrawler)
-  implementation(libs.schemacrawler.sqlite)
-  implementation(libs.schemacrawler.mysql)
-  implementation(libs.schemacrawler.postgres)
-  implementation(libs.schemacrawler.sqlserver)
   testImplementation(platform("org.junit:junit-bom:5.10.0"))
   testImplementation("org.junit.jupiter:junit-jupiter")
 }

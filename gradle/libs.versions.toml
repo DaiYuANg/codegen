@@ -76,3 +76,4 @@ logback = { group = "ch.qos.logback", name = "logback-classic", version = "1.5.1
 dotenv = { group = "io.github.cdimascio", name = "dotenv-java", version = "3.2.0" }
 
 jetbrains-annotation = { group = "org.jetbrains", name = "annotations", version = "26.0.2" }
+
