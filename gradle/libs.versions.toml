@@ -4,24 +4,33 @@ gestalt = "0.35.7"
 mockito = "5.17.0"
 schemacrawler = "16.25.3"
 record-builder = "45"
-picocli = "4.7.7"
-guice = "7.0.0"
+kotlin = "2.1.20"
+koin = "4.1.0-Beta11"
+koin-annotation = "2.0.1-RC1"
+clikt = "5.0.3"
+logback = "1.5.18"
+jackson = "2.18.2"
+javaparser = "3.26.4"
+avaje-inject = "11.4"
+avaje-validaor = "2.4"
+eclipse-collections = "12.0.0.M3"
 
 [plugins]
 dotenv = { id = "co.uzzu.dotenv.gradle", version = "4.0.0" }
 plantuml = { id = "io.gitlab.plunts.plantuml", version = "2.2.1" }
 version-check = { id = "com.github.ben-manes.versions", version = "0.52.0" }
 maniftest = { id = "com.coditory.manifest", version = "1.1.0" }
-shadow = { id = "com.gradleup.shadow", version = "9.0.0-beta12" }
+shadow = { id = "com.gradleup.shadow", version = "9.0.0-beta13" }
 jlink = { id = "org.beryx.jlink", version = "3.1.1" }
 graalvm = { id = "org.graalvm.buildtools.native", version = "0.10.6" }
 spotless = { id = "com.diffplug.spotless", version = "7.0.3" }
 git = { id = "com.xenoterracide.gradle.git", version = "0.12.1" }
 lombok = { id = "name.remal.lombok", version = "3.0.1" }
 mkdocs = { id = "ru.vyarus.mkdocs", version = "4.0.1" }
+ksp = { id = "com.google.devtools.ksp", version = "2.1.20-2.0.1" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 [libraries]
-guice = {group="com.google.inject",name="guice",version.ref="guice"}
 
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 mockito-junit = { group = "org.mockito", name = "mockito-junit-jupiter", version.ref = "mockito" }
@@ -38,19 +47,18 @@ data-faker = { group = "net.datafaker", name = "datafaker", version = "2.4.3" }
 slf4j = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 slf4jJdkPlatform = { group = "org.slf4j", name = "slf4j-jdk-platform-logging", version.ref = "slf4j" }
 slf4jJulBridage = { group = "org.slf4j", name = "jul-to-slf4j", version.ref = "slf4j" }
-oshi = { group = "com.github.oshi", name = "oshi-core-java11", version = "6.8.0" }
 gestalt = { group = "com.github.gestalt-config", name = "gestalt-core", version.ref = "gestalt" }
 gestalt-git = { group = "com.github.gestalt-config", name = "gestalt-git", version.ref = "gestalt" }
-gestalt-guice = { group = "com.github.gestalt-config", name = "gestalt-guice", version.ref = "gestalt" }
+gestalt-kotlin = { group = "com.github.gestalt-config", name = "gestalt-kotlin", version.ref = "gestalt" }
 gestalt-toml = { group = "com.github.gestalt-config", name = "gestalt-toml", version.ref = "gestalt" }
+gestalt-json = { group = "com.github.gestalt-config", name = "gestalt-json", version.ref = "gestalt" }
 gestalt-yaml = { group = "com.github.gestalt-config", name = "gestalt-yaml", version.ref = "gestalt" }
 
 guava = { group = "com.google.guava", name = "guava", version = "33.4.8-jre" }
 
-mysql = { group = "com.mysql", name = "mysql-connector-j", version = "9.1.0" }
+mysql = { group = "com.mysql", name = "mysql-connector-j", version = "9.3.0" }
 postgres = { group = "org.postgresql", name = "postgresql", version = "42.7.4" }
-h2 = { group = "com.h2database", name = "h2", version = "2.3.232" }
-sqlite = { group = "org.xerial", name = "sqlite-jdbc", version = "3.47.1.0" }
+sqlite = { group = "org.xerial", name = "sqlite-jdbc", version = "3.49.1.0" }
 
 record-builder-core = { group = "io.soabase.record-builder", name = "record-builder-core", version.ref = "record-builder" }
 record-builder-processor = { group = "io.soabase.record-builder", name = "record-builder-processor", version.ref = "record-builder" }
@@ -63,17 +71,55 @@ schemacrawler-sqlite = { group = "us.fatehi", name = "schemacrawler-sqlite", ver
 schemacrawler-postgres = { group = "us.fatehi", name = "schemacrawler-postgresql", version.ref = "schemacrawler" }
 schemacrawler-sqlserver = { group = "us.fatehi", name = "schemacrawler-sqlserver", version.ref = "schemacrawler" }
 
-picocli = { group = "info.picocli", name = "picocli", version.ref = "picocli" }
-picocli-codegen = { group = "info.picocli", name = "picocli-codegen", version.ref = "picocli" }
-picocli-shell-jline3 = { group = "info.picocli", name = "picocli-shell-jline3", version.ref = "picocli" }
-
 javapoet = { group = "com.palantir.javapoet", name = "javapoet", version = "0.7.0" }
 
-freemarker = { group = "org.freemarker", name = "freemarker", version = "2.3.32" }
+freemarker = { group = "org.freemarker", name = "freemarker", version = "2.3.34" }
+velocity = { group = "org.apache.velocity", name = "velocity-engine-core", version = "2.4.1" }
 
-logback = { group = "ch.qos.logback", name = "logback-classic", version = "1.5.18" }
+logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
+logback-core = { group = "ch.qos.logback", name = "logback-core", version.ref = "logback" }
 
 dotenv = { group = "io.github.cdimascio", name = "dotenv-java", version = "3.2.0" }
 
 jetbrains-annotation = { group = "org.jetbrains", name = "annotations", version = "26.0.2" }
 
+kotlin-logging-jvm = { group = "io.github.oshai", name = "kotlin-logging-jvm", version = "7.0.7" }
+
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
+koin-annotation-bom = { group = "io.insert-koin", name = "koin-annotations-bom", version.ref = "koin-annotation" }
+koin-annotation = { group = "io.insert-koin", name = "koin-annotations" }
+koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-logger-slf4j = { group = "io.insert-koin", name = "koin-logger-slf4j" }
+
+clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
+clikt-markdown = { group = "com.github.ajalt.clikt", name = "clikt-markdown", version.ref = "clikt" }
+
+jansi = { group = "org.fusesource.jansi", name = "jansi", version = "2.4.1" }
+
+progressbar = { group = "me.tongfei", name = "progressbar", version = "0.10.1" }
+progressbar-ktx = { group = "dev.reimer", name = "progressbar-ktx", version = "0.1.0" }
+
+jackson-core = { group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "jackson" }
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
+jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jackson" }
+jackson-dataformat-yaml = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
+jackson-dataformat-toml = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-toml", version.ref = "jackson" }
+jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
+
+antlr = { group = "org.antlr", name = "antlr4", version = "4.13.2" }
+
+javaparser-core = { group = "com.github.javaparser", name = "javaparser-core", version.ref = "javaparser" }
+
+avaje-validaor = { group = "io.avaje", name = "avaje-validator", version.ref = "avaje-validaor" }
+avaje-validaor-constraints = { group = "io.avaje", name = "avaje-validator-constraints", version.ref = "avaje-validaor" }
+avaje-validaor-codegen = { group = "io.avaje", name = "avaje-validator-generator", version.ref = "avaje-validaor" }
+
+avaje-inject = { group = "io.avaje", name = "avaje-inject", version.ref = "avaje-inject" }
+avaje-inject-test = { group = "io.avaje", name = "avaje-inject-test", version.ref = "avaje-inject" }
+avaje-inject-generator = { group = "io.avaje", name = "avaje-inject-generator", version.ref = "avaje-inject" }
+
+agrona = { group = "org.agrona", name = "agrona", version = "2.0.0" }
+
+eclipse-collections-api = { group = "org.eclipse.collections", name = "eclipse-collections-api", version.ref = "eclipse-collections" }
+eclipse-collections = { group = "org.eclipse.collections", name = "eclipse-collections", version.ref = "eclipse-collections" }

@@ -1,37 +1,30 @@
 package org.codegen.core;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import io.avaje.inject.BeanScope;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.codegen.core.model.CodegenConfig;
-import org.codegen.core.model.InputSource;
-import org.codegen.core.model.TemplateConfiguration;
-import org.codegen.core.module.ConfigModule;
-import org.codegen.core.module.ServiceModule;
+import org.codegen.core.model.ConfigContext;
 import org.codegen.core.service.MetadataService;
 import org.codegen.core.service.TemplateService;
+import org.jetbrains.annotations.NotNull;
 
 @Slf4j
 public class Codegen {
 
-  private final Injector injector;
+  private final BeanScope beanScope = BeanScope.builder().build();
+
+  private final ConfigContext configContext;
 
   @Builder
-  public Codegen(CodegenConfig codegenConfig, InputSource inputSource, TemplateConfiguration templateConfiguration) {
-    val configModule = ConfigModule.builder()
-      .codegenConfig(codegenConfig)
-      .inputSource(inputSource)
-      .templateConfiguration(templateConfiguration)
-      .build();
-
-    this.injector = Guice.createInjector(configModule, new ServiceModule());
+  public Codegen(@NotNull ConfigContext configContext) {
+    this.configContext = configContext;
   }
 
   public void generate() {
-    val metadataService = injector.getInstance(MetadataService.class);
-    val templateService = injector.getInstance(TemplateService.class);
-    val metadata = metadataService.collectMetadata();
+    val metadataService = beanScope.get(MetadataService.class);
+    val templateService = beanScope.get(TemplateService.class);
+    val metadata = metadataService.collectMetadata(configContext.inputSource());
   }
 }

@@ -22,12 +22,12 @@ import java.util.Map;
 public class FreemarkerService implements TemplateService {
   private final Configuration configuration;
 
-  private final TemplateConfiguration templateConfiguration;
+//  private final TemplateConfiguration templateConfiguration;
 
   @SneakyThrows
   public void renderTemplate(String templateName, Map<String, Object> dataModel, Path outputFile) {
     val writer = Files.newBufferedWriter(outputFile);
-    Template template = configuration.getTemplate(templateName);
-    template.process(dataModel, writer);
+//    Template template = configuration.getTemplate(templateName);
+//    template.process(dataModel, writer);
   }
 }
