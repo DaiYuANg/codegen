@@ -1,30 +1,27 @@
 package org.codegen.core;
 
 import io.avaje.inject.BeanScope;
-import lombok.Builder;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.codegen.core.model.CodegenConfig;
-import org.codegen.core.model.ConfigContext;
+import org.codegen.core.model.InputSource;
+import org.codegen.core.model.TemplateConfiguration;
 import org.codegen.core.service.MetadataService;
 import org.codegen.core.service.TemplateService;
-import org.jetbrains.annotations.NotNull;
 
 @Slf4j
-public class Codegen {
-
-  private final BeanScope beanScope = BeanScope.builder().build();
-
-  private final ConfigContext configContext;
-
-  @Builder
-  public Codegen(@NotNull ConfigContext configContext) {
-    this.configContext = configContext;
-  }
+@RecordBuilder
+public record Codegen(
+  CodegenConfig codegenConfig,
+  InputSource inputSource,
+  TemplateConfiguration templateConfiguration
+) {
+  private static final BeanScope beanScope = BeanScope.builder().build();
 
   public void generate() {
     val metadataService = beanScope.get(MetadataService.class);
     val templateService = beanScope.get(TemplateService.class);
-    val metadata = metadataService.collectMetadata(configContext.inputSource());
+    val metadata = metadataService.collectMetadata(inputSource);
   }
 }

@@ -1,24 +1,18 @@
 package org.codegen.cli.command
 
 import com.github.ajalt.clikt.core.CliktCommand
-import com.github.ajalt.clikt.parameters.arguments.argument
-import com.github.ajalt.clikt.parameters.arguments.defaultLazy
-import com.github.ajalt.clikt.parameters.arguments.help
 import com.github.ajalt.clikt.parameters.options.defaultLazy
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
-import com.github.ajalt.mordant.widgets.ProgressBar
 import io.github.oshai.kotlinlogging.KotlinLogging
-import me.tongfei.progressbar.ProgressBarBuilder
 import org.codegen.cli.constant.CODEGEN
 import org.codegen.cli.constant.ENV_PREFIX
 import org.codegen.cli.constant.INPUT_SOURCE
 import org.codegen.cli.constant.TEMPLATE
-import org.codegen.core.Codegen
+import org.codegen.cli.model.LoadedConfig
+import org.codegen.core.CodegenBuilder
 import org.codegen.core.model.CodegenConfig
-import org.codegen.core.model.ConfigContext
-import org.codegen.core.model.ConfigContextBuilder
 import org.codegen.core.model.InputSource
 import org.codegen.core.model.TemplateConfiguration
 import org.fusesource.jansi.Ansi
@@ -49,14 +43,18 @@ class RootCommand : CliktCommand(), KoinComponent {
       Ansi.ansi().fgBrightCyan().bold().render("generate code").reset(),
     )
 
-    val configContext = loadConfig(configFile)
+    val (codegenConfig, inputSource, templateConfig) = loadConfig(configFile)
 
-    val codeGen = Codegen(configContext)
+    val codeGen = CodegenBuilder.builder()
+      .codegenConfig(codegenConfig)
+      .inputSource(inputSource)
+      .templateConfiguration(templateConfig)
+      .build();
 
     codeGen.generate()
   }
 
-  private fun loadConfig(configFile: File): ConfigContext {
+  private fun loadConfig(configFile: File): LoadedConfig {
     val gestalt = GestaltBuilder()
       .addSource(EnvironmentConfigSourceBuilder.builder().setPrefix(ENV_PREFIX).build())
       .addSource(SystemPropertiesConfigSourceBuilder.builder().build())
@@ -70,16 +68,10 @@ class RootCommand : CliktCommand(), KoinComponent {
 
     gestalt.loadConfigs()
 
-    val codegenConfig = gestalt.getConfig(CODEGEN, CodegenConfig::class.java)
-    val inputSourceConfig = gestalt.getConfig(INPUT_SOURCE, InputSource::class.java)
-    val templateConfig = gestalt.getConfig(TEMPLATE, TemplateConfiguration::class.java)
-
-    val configContext = ConfigContextBuilder.builder()
-      .codegenConfig(codegenConfig)
-      .inputSource(inputSourceConfig)
-      .templateConfiguration(templateConfig)
-      .build()
-
-    return configContext
+    return LoadedConfig(
+      codegenConfig = gestalt.getConfig(CODEGEN, CodegenConfig::class.java),
+      inputSource = gestalt.getConfig(INPUT_SOURCE, InputSource::class.java),
+      templateConfig = gestalt.getConfig(TEMPLATE, TemplateConfiguration::class.java)
+    )
   }
 }
