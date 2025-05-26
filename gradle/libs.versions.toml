@@ -14,6 +14,7 @@ javaparser = "3.26.4"
 avaje-inject = "11.5"
 avaje-validaor = "2.4"
 eclipse-collections = "12.0.0.M3"
+junit = "5.10.2"
 
 [plugins]
 dotenv = { id = "co.uzzu.dotenv.gradle", version = "4.0.0" }
@@ -123,3 +124,12 @@ agrona = { group = "org.agrona", name = "agrona", version = "2.0.0" }
 
 eclipse-collections-api = { group = "org.eclipse.collections", name = "eclipse-collections-api", version.ref = "eclipse-collections" }
 eclipse-collections = { group = "org.eclipse.collections", name = "eclipse-collections", version.ref = "eclipse-collections" }
+
+testcontainers = { group = "org.testcontainers", name = "testcontainers-bom", version = "1.21.0" }
+testcontainers-mysql = { group = "org.testcontainers", name = "mysql" }
+testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql" }
+
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
+junit-juiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit" }
+junit-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
+junit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }

@@ -37,6 +37,14 @@ dependencies {
   implementation(libs.jackson.databind)
   implementation(libs.jackson.dataformat.yaml)
   implementation(libs.jackson.dataformat.toml)
+  testImplementation(enforcedPlatform(libs.testcontainers))
+  testImplementation(libs.testcontainers.mysql)
+  testImplementation(libs.testcontainers.postgresql)
+
+  testImplementation(enforcedPlatform(libs.junit.bom))
+  testImplementation(libs.junit.api)
+  testImplementation(libs.junit.engine)
+  testImplementation(libs.junit.juiter)
 }
 
 tasks.test {

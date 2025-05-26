@@ -15,9 +15,13 @@ import schemacrawler.schemacrawler.*;
 import schemacrawler.tools.utility.SchemaCrawlerUtility;
 import us.fatehi.utility.LoggingConfig;
 import us.fatehi.utility.datasource.DatabaseConnectionSource;
+import us.fatehi.utility.datasource.DatabaseConnectionSources;
+import us.fatehi.utility.datasource.MultiUseUserCredentials;
 
 import java.util.List;
 import java.util.logging.Level;
+
+import static us.fatehi.utility.datasource.DatabaseConnectionSources.newDatabaseConnectionSource;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @__(@Inject))
@@ -47,10 +51,13 @@ public class DBMetadataService implements MetadataService {
     return schemaTableMap;
   }
 
-  @Contract(" -> new")
-  private @NotNull DatabaseConnectionSource getDataSource(InputSource inputSource) {
-//    return DatabaseConnectionSources.newDatabaseConnectionSource(
-//      inputSource.url(), new MultiUseUserCredentials(inputSource.username(), inputSource.password()));
-    return null;
+  private @NotNull DatabaseConnectionSource getDataSource(@NotNull InputSource inputSource) {
+    return newDatabaseConnectionSource(
+      inputSource.url(),
+      new MultiUseUserCredentials(
+        inputSource.username(),
+        inputSource.password()
+      )
+    );
   }
 }
