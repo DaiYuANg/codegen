@@ -1,6 +1,9 @@
 package org.codegen.cli.command
 
+import com.github.ajalt.clikt.completion.completionOption
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.PrintHelpMessage
+import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.options.defaultLazy
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
@@ -26,52 +29,26 @@ import org.github.gestalt.config.toml.TomlLoader
 import org.github.gestalt.config.yaml.YamlLoader
 import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.io.File
 
 @Single
 class RootCommand : CliktCommand(), KoinComponent {
   private val log = KotlinLogging.logger {}
 
-  val configFile by option("-c", "--config", help = "config file")
-    .file(mustExist = true, canBeDir = true, mustBeReadable = true, mustBeWritable = true)
-    .help("config file")
-    .defaultLazy { File("codegen.yaml") }
+  private val generateCommand: GenerateCommand by inject()
+  private val initCommand: InitCommand by inject()
 
-  override fun run() {
-    log.atInfo { message = "config file:${configFile}" }
-    echo(
-      Ansi.ansi().fgBrightCyan().bold().render("generate code").reset(),
-    )
-
-    val (codegenConfig, inputSource, templateConfig) = loadConfig(configFile)
-
-    val codeGen = CodegenBuilder.builder()
-      .codegenConfig(codegenConfig)
-      .inputSource(inputSource)
-      .templateConfiguration(templateConfig)
-      .build();
-
-    codeGen.generate()
+  init {
+    subcommands(generateCommand, initCommand)
   }
 
-  private fun loadConfig(configFile: File): LoadedConfig {
-    val gestalt = GestaltBuilder()
-      .addSource(EnvironmentConfigSourceBuilder.builder().setPrefix(ENV_PREFIX).build())
-      .addSource(SystemPropertiesConfigSourceBuilder.builder().build())
-      .addSource(FileConfigSourceBuilder.builder().setFile(configFile).build())
-      .addConfigLoader(PropertyLoader())
-      .addConfigLoader(TomlLoader())
-      .addConfigLoader(EnvironmentVarsLoader())
-      .addConfigLoader(YamlLoader())
-      .setAnnotationTrimWhiteSpace(true)
-      .build()
+  init {
+    completionOption()
+  }
 
-    gestalt.loadConfigs()
-
-    return LoadedConfig(
-      codegenConfig = gestalt.getConfig(CODEGEN, CodegenConfig::class.java),
-      inputSource = gestalt.getConfig(INPUT_SOURCE, InputSource::class.java),
-      templateConfig = gestalt.getConfig(TEMPLATE, TemplateConfiguration::class.java)
-    )
+  override fun run() {
+    log.atInfo { message = "codegen" }
+    throw PrintHelpMessage(currentContext)
   }
 }

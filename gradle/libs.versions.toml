@@ -1,17 +1,17 @@
 [versions]
 slf4j = "2.0.16"
-gestalt = "0.35.7"
+gestalt = "0.35.8"
 mockito = "5.17.0"
-schemacrawler = "16.25.3"
-record-builder = "45"
+schemacrawler = "16.25.4"
+record-builder = "47"
 kotlin = "2.1.20"
-koin = "4.1.0-Beta11"
+koin = "4.1.0-RC1"
 koin-annotation = "2.0.1-RC1"
 clikt = "5.0.3"
 logback = "1.5.18"
 jackson = "2.18.2"
 javaparser = "3.26.4"
-avaje-inject = "11.4"
+avaje-inject = "11.5"
 avaje-validaor = "2.4"
 eclipse-collections = "12.0.0.M3"
 
@@ -95,7 +95,7 @@ koin-logger-slf4j = { group = "io.insert-koin", name = "koin-logger-slf4j" }
 clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
 clikt-markdown = { group = "com.github.ajalt.clikt", name = "clikt-markdown", version.ref = "clikt" }
 
-jansi = { group = "org.fusesource.jansi", name = "jansi", version = "2.4.1" }
+jansi = { group = "org.fusesource.jansi", name = "jansi", version = "2.4.2" }
 
 progressbar = { group = "me.tongfei", name = "progressbar", version = "0.10.1" }
 progressbar-ktx = { group = "dev.reimer", name = "progressbar-ktx", version = "0.1.0" }

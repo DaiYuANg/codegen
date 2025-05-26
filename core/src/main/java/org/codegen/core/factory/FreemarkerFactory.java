@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 
 @Factory
 @Slf4j
-public class FreemarkFactory {
+public class FreemarkerFactory {
   @Bean
   public Configuration get() {
     val cfg = new Configuration(Configuration.VERSION_2_3_32);
