@@ -1,0 +1,9 @@
+package com.example.model;
+
+public class {{ .Name }} {
+{{- range .Columns }}
+    private {{ .Type }} {{ .Name | camelCase }};
+{{- end }}
+
+    // getter/setter 略
+}
