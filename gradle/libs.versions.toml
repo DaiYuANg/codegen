@@ -1,0 +1,53 @@
+[versions]
+javafx = "24"
+mapstruct = "1.6.3"
+vavr = "0.10.7"
+recordBuilder = "49"
+ebean = "17.1.0"
+eclipse-collections = "13.0.0"
+
+[plugins]
+version-check = { id = "com.github.ben-manes.versions", version = "0.52.0" }
+lombok = { id = "name.remal.lombok", version = "3.1.1" }
+dotenv = { id = "co.uzzu.dotenv.gradle", version = "4.0.0" }
+spotless = { id = "com.diffplug.spotless", version = "7.2.1" }
+graalvm-native = { id = "org.graalvm.buildtools.native", version = "0.11.1" }
+git = { id = "com.xenoterracide.gradle.git", version = "0.13.0" }
+ebean = { id = "io.ebean", version.ref = "ebean" }
+moduleplugin = { id = "org.javamodularity.moduleplugin", version = "1.8.15" }
+javafxplugin = { id = "org.openjfx.javafxplugin", version = "0.1.0" }
+
+[libraries]
+jetbrains-annotation = { group = "org.jetbrains", name = "annotations", version = "26.0.2" }
+
+mapstruct = { group = "org.mapstruct", name = "mapstruct", version.ref = "mapstruct" }
+mapstruct-annotation-processor = { group = "org.mapstruct", name = "mapstruct-processor", version.ref = "mapstruct" }
+
+record-builder-processor = { group = "io.soabase.record-builder", name = "record-builder-processor", version.ref = "recordBuilder" }
+record-builder-core = { group = "io.soabase.record-builder", name = "record-builder-core", version.ref = "recordBuilder" }
+
+uuid-creator = { group = "com.github.f4b6a3", name = "uuid-creator", version = "6.1.1" }
+
+apache-common-text = { group = "org.apache.commons", name = "commons-text", version = "1.14.0" }
+apache-common-codec = { group = "commons-codec", name = "commons-codec", version = "1.19.0" }
+apache-common-crypto = { group = "org.apache.commons", name = "commons-crypto", version = "1.2.0" }
+vavr = { group = "io.vavr", name = "vavr", version.ref = "vavr" }
+jimfs = { group = "com.google.jimfs", name = "jimfs", version = "1.3.0" }
+auto-factory = { group = "com.google.auto.factory", name = "auto-factory", version = "1.1.0" }
+slf4jJulBridge = { group = "org.slf4j", name = "jul-to-slf4j", version = "2.0.17" }
+
+h2 = { group = "com.h2database", name = "h2", version = "2.4.240" }
+
+ebean = { group = "io.ebean", name = "ebean", version.ref = "ebean" }
+ebean-querybean-generator = { group = "io.ebean", name = "querybean-generator", version.ref = "ebean" }
+ebean-test = { group = "io.ebean", name = "ebean-test", version.ref = "ebean" }
+
+mutiny = { group = "io.smallrye.reactive", name = "mutiny", version = "3.0.0" }
+
+eclipse-collections-api = { group = "org.eclipse.collections", name = "eclipse-collections-api", version.ref = "eclipse-collections" }
+eclipse-collections = { group = "org.eclipse.collections", name = "eclipse-collections", version.ref = "eclipse-collections" }
+eclipse-collections-forkjoin = { group = "org.eclipse.collections", name = "eclipse-collections-forkjoin", version.ref = "eclipse-collections" }
+eclipse-collections-test-util = { group = "org.eclipse.collections", name = "eclipse-collections-testutils", version.ref = "eclipse-collections" }
+fastutil = { group = "it.unimi.dsi", name = "fastutil", version = "8.5.16" }
+
+richtextfx = {group="org.fxmisc.richtext",name="richtextfx",version="0.11.6"}
