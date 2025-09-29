@@ -1,5 +1,3 @@
-import io.miret.etienne.gradle.sass.CompileSass
-
 plugins {
   java
   application
